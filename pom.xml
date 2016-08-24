@@ -17,7 +17,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
+        <java.version>1.8</java.version>	
     </properties>
     <dependencies>
         <dependency>
@@ -141,7 +141,59 @@
 	    <plugin>
 		<groupId>io.fabric8</groupId>
 		<artifactId>docker-maven-plugin</artifactId>    
-		<version>0.15.16</version>				
+		<version>0.15.16</version>		
+		<configuration>     
+		    <images>			
+			<image>
+			    <name>postgres:9.5.4</name>
+			    <alias>netbeansevening-db</alias>
+			    <run>
+				<env>
+				    <POSTGRES_USER>netbeansevening</POSTGRES_USER>
+				    <POSTGRES_PASSWORD>netbeansevening</POSTGRES_PASSWORD>
+				</env>			
+				<wait>
+				    <log>database system is ready to accept connections</log>
+				    <time>20000</time>
+				</wait>
+			    </run>
+			</image>			
+			<image>
+			    <name>msimons/netbeansevening-app</name>
+			    <build>
+				<from>java:8u102</from>
+				<tags>
+				    <tag>${project.version}</tag>
+				</tags>
+				<ports>
+				    <port>8080</port>
+				</ports>	
+				<volumes>
+				    <volume>/tmp</volume>
+				</volumes>			
+				<assembly>
+				    <descriptorRef>artifact</descriptorRef>
+				</assembly>
+				<entryPoint>
+				    <exec>
+					<args>java</args>
+					<args>-Dspring.profiles.active=prod</args>
+					<args>-jar</args>
+					<args>/maven/${project.build.finalName}.jar</args>					
+				    </exec>
+				</entryPoint>
+			    </build>
+			    <run>
+				<links>
+				    <link>netbeansevening-db:db</link>
+				</links>
+				<ports>
+				    <port>8080:8080</port>				    
+				</ports>				
+			    </run>
+			</image>						
+		    </images>
+		</configuration>						
 		<executions>
 		    <execution>
 			<id>prepare-it-database</id>
@@ -155,6 +207,10 @@
 				    <name>postgres:9.5.4</name>
 				    <alias>netbeansevening-it-db</alias>			    
 				    <run>	
+					<env>
+					    <POSTGRES_USER>postgres</POSTGRES_USER>
+					    <POSTGRES_PASSWORD>postgres</POSTGRES_PASSWORD>
+					</env>	
 					<ports>
 					    <port>netbeansevening-it-db.port:5432</port>			
 					</ports>
@@ -173,7 +229,14 @@
 			<goals>
 			    <goal>stop</goal>
 			</goals>			
-		    </execution>
+		    </execution>		    		    
+		    <execution>
+			<id>install-and-build</id>
+			<phase>install</phase>
+			<goals>
+			    <goal>build</goal>
+			</goals>			
+		    </execution>			
 		</executions>
 	    </plugin>
         </plugins>
