@@ -1,6 +1,7 @@
 package ac.simons.netbeansevening;
 
 import javax.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,14 +13,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping("/registrations")
+@RequiredArgsConstructor
 public class RegistrationController {
     
     private final RegistrationRepository registrationRepository;
-
-    public RegistrationController(RegistrationRepository registrationRepository) {
-	this.registrationRepository = registrationRepository;
-    }
-    
+   
     @RequestMapping(method = GET)
     public Iterable<RegistrationEntity> list() {
 	return this.registrationRepository.findAll();
