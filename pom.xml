@@ -47,6 +47,11 @@
 	    <groupId>org.flywaydb</groupId>
 	    <artifactId>flyway-core</artifactId>
 	</dependency>
+	<dependency>
+	    <groupId>org.projectlombok</groupId>
+	    <artifactId>lombok</artifactId>
+	    <scope>provided</scope>
+	</dependency>
     </dependencies>
     <build>
         <plugins>
@@ -55,6 +60,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <fork>true</fork>
+		    <excludeArtifactIds>lombok</excludeArtifactIds>
                 </configuration>
             </plugin>
         </plugins>
