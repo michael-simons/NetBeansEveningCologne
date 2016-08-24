@@ -67,6 +67,12 @@
 		<groupId>org.jacoco</groupId>
 		<artifactId>jacoco-maven-plugin</artifactId>
 		<version>0.7.7.201606060606</version>
+		<configuration>
+                    <excludes>
+                        <!-- Exclude JPA Metamodel -->
+                        <exclude>ac/simons/netbeansevening/*_.class</exclude>
+		    </excludes>
+		</configuration>
 		<executions>
 		    <execution>
 			<id>pre-unit-test</id>
@@ -83,6 +89,33 @@
 		    </execution>
 		</executions>		
 	    </plugin>
+	    <plugin>
+                <groupId>org.bsc.maven</groupId>
+                <artifactId>maven-processor-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>process</id>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <processors>
+                                <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
+                            </processors>
+                            <outputDirectory>${project.build.directory}/generated-sources/JPAMetaModel/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.hibernate</groupId>
+                        <artifactId>hibernate-jpamodelgen</artifactId>
+                        <version>${hibernate.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
 </project>
