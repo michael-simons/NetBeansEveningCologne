@@ -41,6 +41,11 @@ mvn docker:run
 
 ausgeführt wird. Dabei wird ein PostgreSQL Container gestartet, in dem die Daten der Anwendung persistiert werden.
 
+## Zusammenfassung der Veranstaltung und Screencast
+
+[NetBeans, Maven and Spring Boot… more fun together](http://info.michael-simons.eu/2016/09/10/netbeans-maven-and-spring-boot-more-fun-together/)
+[NetBeans 8.1 support for Project Lombok and JaCoCo](https://youtu.be/zmMtmpavL4I)
+
 ## Ressourcen
 
 * [Zur automatischen Konfiguration von Spring](https://github.com/michael-simons/springio2016)
