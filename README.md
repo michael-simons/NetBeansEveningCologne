@@ -2,6 +2,12 @@
 
 **Important:** _The commits and commit messages have been written very carefully to guide you through reading this project and understanding the talk. Please take your time to study them if you don't understand something_.
 
+## Slides
+
+The slides are inside this repository and also on Speakerdeck:
+
+[NetBeans, Maven und Spring Boot …mehr Spaß zusammen](https://speakerdeck.com/michaelsimons/netbeans-maven-und-spring-boot-dot-dot-dot-mehr-spass-zusammen)
+
 ## Talk für den NetBeans Evening Cologne, September 2016
 
 _Note: [Faktor Zehn](https://www.faktorzehn.de/de/ueber-faktor-zehn/veranstaltungen/veranstaltungen-detailseite/netbeans-evening-in-koeln.html?cHash=9e9355b5b02d89a2cfa4f0998ebe0547) hosted a [NetBeans](https://netbeans.org) event in Cologne in September 2016. The event was in German, so is this talk. By reading through the project and the commit message, you should get at pretty good idea, what's going on._
